@@ -1,0 +1,136 @@
+<!-- <!DOCTYPE html> -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyatnashki</title>
+    <link rel="stylesheet" href="Pyatnashki.css">
+</head>
+<body>
+
+    <table>
+      <tr>
+         <td class="a11">1</td>
+         <td class="a12">2</td>
+         <td class="a13">3</td>
+         <td class="a14">4</td>
+      </tr>
+      <tr>
+          <td class="a21">5</td>
+          <td class="a22">6</td>
+          <td class="a23">7</td>
+          <td class="a24">8</td>
+      </tr>
+      <tr>
+          <td class="a31">9</td>
+          <td class="a32">10</td>
+          <td class="a33">11</td>
+          <td class="a34">12</td>
+      </tr>
+      <tr>
+        <td class="a41">13</td>
+        <td class="a42">14</td>
+        <td class="a43">15</td>
+        <td class="a44"> </td>
+    </tr>
+
+    </table>
+
+    <div class="win"></div>
+
+<!-- !-- Div "black hole" for cathching thrash)  --> 
+    <div class = " a1 a2 a3 a4 a10 a20 a30 a40 a51 a52 a53 a54 a15 a25 a35 a45"></div>
+    
+    <script>
+
+        function randomInteger(min, max) {
+            let rand = min + Math.random() * (max + 1 - min);
+            return Math.floor(rand);
+        }
+
+        function fullSet() {
+            mySet.add(randomInteger(1, 15)); 
+            if (mySet.size == 15) {
+                return}
+            else {fullSet()}
+        }
+
+        let mySet = new Set();
+        fullSet();
+
+        var myArr = Array.from(mySet);
+        function funcInit() {
+        let k=0;
+            for (i=1; i<=4;i++){
+                for(j=1;j<=4;j++){
+                        document.querySelector(`.a${i}${j}`).innerHTML = myArr[k];
+                        k++;
+                }
+            }
+                document.querySelector('.a44').innerHTML = ' ';
+        }
+
+        funcInit();
+        document.querySelector(`.a44`).style.backgroundColor='white';   
+        let listItems = document.querySelectorAll("td");
+        for (i=0; i<17;i++){
+            listItems[i].addEventListener("click", (event) => {
+                funcAnal(event);
+            })
+        }
+
+
+        function funcAnal(event) {
+            let pressed = String(event.target.className);
+           
+            let changeVar;
+            if (document.querySelector(`.a${String(Number(pressed.slice(1)) + 10)}`).innerHTML == ' ') {
+                changeVar = document.querySelector(`.${String(pressed)}`).innerHTML;
+                document.querySelector(`.${String(pressed)}`).innerHTML = ' ';
+                document.querySelector(`.${String(pressed)}`).style.backgroundColor='white';
+                document.querySelector(`.a${String(Number(pressed.slice(1)) + 10)}`).innerHTML = changeVar;
+                document.querySelector(`.a${String(Number(pressed.slice(1)) + 10)}`).style.backgroundColor='brown';
+            }
+            if (document.querySelector(`.a${String(Number(pressed.slice(1)) - 10)}`).innerHTML == ' ') {
+                changeVar = document.querySelector(`.${String(pressed)}`).innerHTML;
+                document.querySelector(`.${String(pressed)}`).innerHTML = ' ';
+                document.querySelector(`.${String(pressed)}`).style.backgroundColor='white';
+                document.querySelector(`.a${String(Number(pressed.slice(1)) - 10)}`).innerHTML = changeVar;
+                document.querySelector(`.a${String(Number(pressed.slice(1)) - 10)}`).style.backgroundColor='brown';
+            }
+            if (document.querySelector(`.a${String(Number(pressed.slice(1)) - 1)}`).innerHTML == ' ') {
+                changeVar = document.querySelector(`.${String(pressed)}`).innerHTML;
+                document.querySelector(`.${String(pressed)}`).innerHTML = ' ';
+                document.querySelector(`.${String(pressed)}`).style.backgroundColor='white';
+                document.querySelector(`.a${String(Number(pressed.slice(1)) - 1)}`).innerHTML = changeVar;
+                document.querySelector(`.a${String(Number(pressed.slice(1)) -1)}`).style.backgroundColor='brown';
+            }
+            if (document.querySelector(`.a${String(Number(pressed.slice(1)) + 1)}`).innerHTML == ' ') {
+                changeVar = document.querySelector(`.${String(pressed)}`).innerHTML;
+                document.querySelector(`.${String(pressed)}`).innerHTML = ' ';
+                document.querySelector(`.${String(pressed)}`).style.backgroundColor='white';
+                document.querySelector(`.a${String(Number(pressed.slice(1)) + 1)}`).innerHTML = changeVar;
+                document.querySelector(`.a${String(Number(pressed.slice(1)) + 1)}`).style.backgroundColor='brown';
+            }
+
+            let resultNode = document.querySelectorAll('td');
+            let resultArr = [];
+            let flag=0;
+            for(i=0;i<16;i++){
+               resultArr[i] = resultNode[i].innerHTML;
+            }
+            for(i=0;i<14;i++){
+                if(Number(resultArr[i])>Number(resultArr[i+1])){
+                    flag=1;
+                }
+            }
+                if(flag==1){console.log('no!')}
+                if(flag==0){
+                    document.querySelector('.win').classList.add('act');
+                    document.querySelector('.win').innerHTML='YOU DID IT!';
+                }
+        }
+    </script>
+</body>
+</html>

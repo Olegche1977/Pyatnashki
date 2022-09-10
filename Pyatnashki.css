@@ -1,0 +1,39 @@
+table {
+    width: 500px;
+    height: 500px;
+    
+
+}
+
+td {
+    text-align: center;
+    text-decoration: solid;
+    min-width: 20;
+    min-height: 20;
+    color:black;
+    background-color: brown;
+    border-radius: 5px;
+}
+
+td :empty {
+    background-color: white;
+}
+.bar {
+    width: 20px;
+    height: 20px;
+}
+
+
+.act {
+    padding:20px;
+    position: absolute;
+    display: block;
+    top:100px;
+    right:300px;
+    text-align:center;
+    font-size: 25px;
+    width: 200px;
+    height: 200px;
+    background-color: yellowgreen;
+    border-radius: 5px;
+}
